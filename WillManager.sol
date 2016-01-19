@@ -1,7 +1,10 @@
+//Note that I started with github.com/maran/notareth/blob/master/contract.sol as a base 
+//to build off, but the only thing that really survived was the empty() function.
+
 contract WillManager {
-    //Making these variables public displays them in the mist browser.
     //The Mist Browser 0.38 has lots of bugs, expect to have to refresh the contract 
     //and to have to increase the suggested gas amount for calling functions to work.
+    //Making these variables public displays them in the mist browser.
     address public WillOwner;
     bytes32 public HashOfWill;
     bytes32 public HashOfWillBeingChecked;
