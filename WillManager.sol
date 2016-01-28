@@ -36,7 +36,7 @@ contract WillManager {
     	}
 	}
 	/// @notice: This function can be called by anyone and is used to verify that the version
-	///of the Will that they have is the current up-to-date version.
+	///of the Will that they have is the current up-to-date version
 	/// @param: string willUserIsChecking The version of the will that the user wants to verify
 	function checkWill(string willUserIsChecking) {
                 lastWillChecker = msg.sender;
