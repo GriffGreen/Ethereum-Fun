@@ -1,45 +1,40 @@
-//Note that I started with github.com/maran/notareth/blob/master/contract.sol as a base 
-//to build off, but the only thing that really survived was the empty() function.
-
 contract WillManager {
-    //The Mist Browser 0.38 has lots of bugs, expect to have to refresh the contract 
-    //and to have to increase the suggested gas amount for calling functions to work.
-    //Making these variables public displays them in the mist browser.
-    address public WillOwner;
-    bytes32 public HashOfWill;
-    bytes32 public HashOfWillBeingChecked;
-    bool public WillIsCorrect;
-    bool public WillCreated;
-    address public LastWillChecker;
-    
-    function WillManager(){
-        WillOwner = msg.sender; 
-    }
-    
-    // In case you sent funds by accident. Don't send funds to this contract.
-    function empty(){
-     uint256 balance = address(this).balance;
-     address(WillOwner).send(balance);
-    }
-    //This function can only be called by the person who first deployed this
-    //contract, it creates a new will and replaces the old will if it existed.
-    function NewWill(string Will) {
-        if (msg.sender != WillOwner) {
-            WillCreated = false;
-        }else{
-            HashOfWill = sha3(Will);
-            WillCreated = true;
-        }
-    }
-    //This function can be called by anyone and they can verify that the version
-    //of the Will that they have is the current up to date version.
-    function CheckWill(string WillUserIsChecking) {
-        LastWillChecker = msg.sender;
-        HashOfWillBeingChecked = sha3(WillUserIsChecking);   
-        if (HashOfWillBeingChecked == HashOfWill) {
-            WillIsCorrect = true;
-        }else{
-            WillIsCorrect = false;
-        }
-    }
+	//Making these variables public displays them in the Ethereum Wallet.
+	address public willOwner;
+	bytes32 public hashOfWill;
+	bytes32 public hashOfWillBeingChecked;
+	bool public willIsCorrect;
+	bool public willCreated;
+	address public lastWillChecker;
+	
+	function WillManager(){
+    	willOwner = msg.sender;
+	}
+	
+	// In case you sent ether by accident. Don't send funds to this contract.
+	function empty(){
+ 	uint256 balance = address(this).balance;
+     address(willOwner).send(balance);
+	}
+	//This function can only be called by the person who first deployed this
+	//contract, it creates a new will and replaces the old will if it existed.
+	function newWill(string will) {
+    	if (msg.sender != willOwner) {
+        	willCreated = false;
+    	} else {
+        	hashOfWill = sha3(will);
+            willCreated = true;
+    	}
+	}
+	//This function can be called by anyone and they can verify that the version
+	//of the Will that they have is the current up to date version.
+	function checkWill(string willUserIsChecking) {
+                lastWillChecker = msg.sender;
+                hashOfWillBeingChecked = sha3(willUserIsChecking);  
+	if (hashOfWillBeingChecked == hashOfWill) {
+            willIsCorrect = true;
+	    } else {
+           	willIsCorrect = false;
+    	}
+	}
 }
