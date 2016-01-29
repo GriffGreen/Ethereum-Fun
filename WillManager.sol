@@ -29,20 +29,20 @@ contract WillManager {
 	function newWill(string will) {
     		if (msg.sender != willOwner) {
         		willCreated = false;
-    	} else {
-        	hashOfWill = sha3(will);
-            	willCreated = true;
-    	}
+    		} else {
+        		hashOfWill = sha3(will);
+            		willCreated = true;
+    		}
 	}
 	/// notice: This function can be called by anyone and is used to verify that the version
 	///of the Will that they have is the current up-to-date version
 	function checkWill(string willUserIsChecking) {
                 lastWillChecker = msg.sender;
                 hashOfWillBeingChecked = sha3(willUserIsChecking);  
-	if (hashOfWillBeingChecked == hashOfWill) {
-            willIsCorrect = true;
-	    } else {
-           	willIsCorrect = false;
-    	}
+		if (hashOfWillBeingChecked == hashOfWill) {
+            		willIsCorrect = true;
+	    	} else {
+           		willIsCorrect = false;
+    		}
 	}
 }
